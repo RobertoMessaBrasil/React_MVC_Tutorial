@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import i18n from './i18n'
-import v from './v'
+import { defaultRow, retrieve, submit } from './m'
 
-const EP_URL = 'http://localhost:8080/contactmanager/findById'
-const EP_UPDATEURL = 'http://localhost:8080/contactmanager/updateContact'
+import { editForm, invalidDataMsg } from './v'
 
 export default class extends Component {
 
@@ -15,23 +13,34 @@ export default class extends Component {
 
         let s = t.state
 
-        if (s.redirect === true) {
+        if (s.isRedirect === true) {
 
             return <Redirect to={"/Display/" + s.id} />
 
         }
 
-        return v(t)
+        if (s.isInvalidContactData) {
+
+            return invalidDataMsg(t)
+
+        }
+
+        return editForm(t)
 
     }
-
+    
     changeHandler(e) {
 
         let t = this
+        let s = t.state
+
+        let row = s.row
+
+        row[e.target.name] = e.target.value
 
         t.setState({
 
-            [e.target.name]: e.target.value
+            row: row
 
         })
 
@@ -44,113 +53,30 @@ export default class extends Component {
         let t = this
         let s = t.state
 
-        if (s.name === '') {
+        let result = await submit(s)
 
-            alert(i18n.msg1)
+        if (result.ok) {
 
-            return
+            t.setState({ isRedirect: true })
 
         }
 
-        //t.submitDataMock()
-
-        await t.submitData()
-
     }
 
-    async getData() {
-
-        let t = this
-        let s = t.state
-
-        await fetch(EP_URL + '/' + s.id)
-
-            .then(response => response.json())
-
-            .then(result => t.setState({
-
-                id: result.id,
-                name: result.name,
-                description: result.description
-
-            }))
-
-            .catch(e => console.log(e));
-
-    }
-
-    getDataMock() {
+    closeinvalidDataMsg() {
 
         let t = this
 
-        t.setState({
-
-            name: 'Judas Priest',
-            description: 'Greatest Heavy Metal Band of The World!'
-
-        })
+        t.setState({ isInvalidContactData: false })
 
     }
 
     async componentDidMount() {
 
         let t = this
-
-        //t.getDataMock()
-
-        await t.getData()
-
-    }
-
-    async submitData() {
-
-        let t = this
         let s = t.state
 
-        await fetch(
-
-            EP_UPDATEURL,
-
-            {
-
-                method: 'PUT',
-
-                headers: {
-
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-
-                },
-
-                body: JSON.stringify({
-
-                    id: s.id,
-
-                    name: s.name,
-
-                    description: s.description
-
-                })
-
-            }
-
-        )
-
-            .then(result => t.setState({
-
-                redirect: true
-
-            }))
-
-            .catch(e => console.log(e));
-
-    }
-
-    submitDataMock() {
-
-        let t = this
-
-        t.setState({ redirect: true })
+        t.setState({ row: await retrieve(s) })
 
     }
 
@@ -164,12 +90,15 @@ export default class extends Component {
 
             id: props.match.params.id,
 
-            redirect: false
+            isRedirect: false,
+
+            row: defaultRow()
 
         }
 
         t.changeHandler = t.changeHandler.bind(t)
         t.submitHandler = t.submitHandler.bind(t)
+        t.closeinvalidDataMsg = t.closeinvalidDataMsg.bind(t)
 
     }
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import v from './v'
+import { submit } from './m'
 
-const EP_URL = 'http://localhost:8080/contactmanager/deleteContact'
+import { confirmDialog } from './v'
+
+const YES = 'y'
+const NO = 'n'
 
 export default class extends Component {
 
@@ -13,17 +16,17 @@ export default class extends Component {
 
         let s = t.state
 
-        if (s.option === true) {
+        if (s.option === YES) {
 
             return <Redirect to="/" />
 
-        } else if (s.option === false) {
+        } else if (s.option === NO) {
 
             return <Redirect to={"/Display/" + s.id} />
 
         }
 
-        return v(t)
+        return confirmDialog(t)
 
     }
 
@@ -31,10 +34,9 @@ export default class extends Component {
 
         let t = this
 
-        //t.submitDataMock()
-        await t.submitData()
+        await submit()
 
-        t.setState({ option: true })
+        t.setState({ option: YES })
 
     }
 
@@ -42,43 +44,7 @@ export default class extends Component {
 
         let t = this
 
-        t.setState({ option: false })
-
-    }
-
-    async submitData() {
-
-        let t = this
-        let s = t.state
-
-        await fetch(
-
-            EP_URL + '/' + s.id,
-
-            {
-
-                method: 'DELETE'/*,
-
-                headers: {
-
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-
-                }*/
-
-            }
-
-        )
-
-            .catch(e => console.log(e));
-
-    }
-
-    submitDataMock() {
-
-        let t = this
-
-        t.setState({ option: true })
+        t.setState({ option: NO })
 
     }
 
@@ -92,7 +58,7 @@ export default class extends Component {
 
             id: props.match.params.id,
 
-            option: null
+            option: ''
 
         }
 

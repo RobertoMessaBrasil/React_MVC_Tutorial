@@ -1,8 +1,7 @@
 import { Component } from 'react'
 
-import v from './v'
-
-const EP_URL = 'http://localhost:8080/contactmanager/findAll'
+import { defaultRowList, retrieveAll } from './m'
+import { displayAll } from './v'
 
 export default class extends Component {
 
@@ -10,52 +9,16 @@ export default class extends Component {
 
         let t = this
 
-        return v(t)
-
-    }
-
-    getDataMock() {
-
-        let t = this
-
-        t.setState({
-
-            rowList: [
-
-                { id: 1, name: 'Judas Priest', description: 'Greatest Heavy Metal Band of The World!' }
-
-            ]
-
-        })
-
-    }
-
-    async getData() {
-
-        let t = this
-
-        await fetch(EP_URL)
-
-            .then(response => response.json())
-
-            .then(result => t.setState({
-
-
-                rowList: result
-
-            }))
-
-            .catch(e => console.log(e));
+        return displayAll(t)
 
     }
 
     async componentDidMount() {
 
         let t = this
+        let s = t.state
 
-        //t.getDataMock()
-
-        await t.getData()
+        t.setState({ rowList: await retrieveAll(s) })
 
     }
 
@@ -65,7 +28,7 @@ export default class extends Component {
 
         let t = this
 
-        t.state = { 'rowList': [] }
+        t.state = { rowList: defaultRowList() }
 
     }
 

@@ -1,8 +1,8 @@
 import { Component } from 'react'
 
-import v from './v'
+import { defaultRow, retrieve } from './m'
 
-const EP_URL = 'http://localhost:8080/contactmanager/findById'
+import { display } from './v'
 
 export default class extends Component {
 
@@ -10,51 +10,16 @@ export default class extends Component {
 
         let t = this
 
-        return v(t)
-
-    }
-
-    async getData() {
-
-        let t = this
-        let s = t.state
-
-        await fetch(EP_URL + '/' + s.id)
-
-            .then(response => response.json())
-
-            .then(result => t.setState({
-
-                id: result.id,
-                name: result.name,
-                description: result.description
-
-            }))
-
-            .catch(e => console.log(e));
-
-    }
-
-    getDataMock() {
-
-        let t = this
-
-        t.setState({
-
-            name: 'Judas Priest',
-            description: 'Greatest Heavy Metal Band of The World!'
-
-        })
+        return display(t)
 
     }
 
     async componentDidMount() {
 
         let t = this
+        let s = t.state
 
-        //t.getDataMock()
-
-        await t.getData()
+        t.setState({ row: await retrieve(s) })
 
     }
 
@@ -66,7 +31,8 @@ export default class extends Component {
 
         t.state = {
 
-            id: props.match.params.id
+            id: props.match.params.id,
+            row: defaultRow()
 
         }
 

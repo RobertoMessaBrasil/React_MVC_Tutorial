@@ -4,15 +4,30 @@ export default {
 
     title: i18n.title,
 
-    label1: 'Home',
-    label2: 'Cancel',
-    label3: 'Contact',
-    label4: 'Name',
-    label5: 'Description',
-    label6: 'Save',
-    label7: 'Yes',
-    label7: 'No',
-    msg1: 'Name must be filled',
-    msg2: 'Confirm delete?'
+    editForm: {
+
+        label1: 'Home',
+        label2: 'Cancel',
+        label3: 'Contact',
+        label4: 'Name',
+        label5: 'Description',
+        label6: 'Save'
+
+    },
+
+    invalidDataMsg: {
+
+        msg1: 'Name must be filled',
+        label1: 'Close',
+
+    },
+
+    confirmDialog: {
+
+        msg1: 'Confirm delete?',
+        label1: 'Yes',
+        label2: 'No'
+
+    },
 
 }

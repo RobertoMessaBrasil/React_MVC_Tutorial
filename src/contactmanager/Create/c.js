@@ -1,35 +1,45 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import i18n from './i18n'
-import v from './v'
+import { defaultRow, submit } from './m'
 
-const EP_URL = 'http://localhost:8080/contactmanager/createContact'
+import { createForm, invalidDataMsg } from './v'
 
-class c extends Component {
+export default class extends Component {
 
     render() {
 
         let t = this
         let s = t.state
 
-        if (s.redirect === true) {
+        if (s.isRedirect) {
 
             return <Redirect to="/" />
 
         }
 
-        return v(t)
+        if (s.isInvalidContactData) {
+
+            return invalidDataMsg(t)
+
+        }
+
+        return createForm(t)
 
     }
 
     changeHandler(e) {
 
         let t = this
+        let s = t.state
+
+        let row = s.row
+
+        row[e.target.name] = e.target.value
 
         t.setState({
 
-            [e.target.name]: e.target.value
+            row: row
 
         })
 
@@ -42,69 +52,25 @@ class c extends Component {
         let t = this
         let s = t.state
 
-        if (s.name === '') {
+        let result = await submit(s)
 
-            alert(i18n.msg1)
+        if (result.ok) {
 
-            return
+            t.setState({ isRedirect: true })
+
+        } else {
+
+            t.setState({ isInvalidContactData: true })
 
         }
 
-        //t.submitDataMock()
-
-        await t.submitData()
-
     }
 
-    async submitData() {
-
-        let t = this
-        let s = t.state
-
-        await fetch(
-
-            EP_URL,
-
-            {
-
-                method: 'POST',
-
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-
-                body: JSON.stringify({
-
-                    name: s.name,
-
-                    description: s.description
-
-                })
-
-            }
-
-        )
-
-            .then(response => response.json())
-
-            .then(result => t.setState({
-
-
-                rowList: result,
-                redirect: true
-
-            }))
-
-            .catch(e => console.log(e));
-
-    }
-
-    submitDataMock() {
+    closeinvalidDataMsg() {
 
         let t = this
 
-        t.setState({ redirect: true })
+        t.setState({ isInvalidContactData: false })
 
     }
 
@@ -114,13 +80,12 @@ class c extends Component {
 
         let t = this
 
-        t.state = { name: '', description: '', redirect: false }
+        t.state = { row: defaultRow(), isRedirect: false, isInvalidContactData: false }
 
         t.changeHandler = t.changeHandler.bind(t)
         t.submitHandler = t.submitHandler.bind(t)
+        t.closeinvalidDataMsg = t.closeinvalidDataMsg.bind(t)
 
     }
 
 }
-
-export default c

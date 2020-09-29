@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import i18n from './i18n'
 
-export default (t) => {
+export function displayAll(t) {
 
     let s = t.state
 
@@ -13,15 +13,15 @@ export default (t) => {
 
             <h2>{i18n.title}</h2>
 
-            <p><Link to="/Create">{i18n.label1}</Link></p>
+            <p><Link to="/Create">{i18n.rowList.label1}</Link></p>
 
             <fieldset>
 
-                <legend>{i18n.label2}</legend>
+                <legend>{i18n.rowList.label2}</legend>
 
                 {s.rowList.length === 0 &&
 
-                    <p>{i18n.msg1}</p>
+                    <p>{i18n.rowList.msg1}</p>
 
                 }
 

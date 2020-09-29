@@ -2,7 +2,7 @@ import React from 'react'
 
 import i18n from './i18n'
 
-export default (t) => {
+export function confirmDialog(t) {
 
     return (
 
@@ -17,7 +17,7 @@ export default (t) => {
 
                     <tr>
 
-                        <td>{i18n.msg1}</td>
+                        <td>{i18n.frontPage.msg1}</td>
 
                     </tr>
 
@@ -25,8 +25,8 @@ export default (t) => {
 
                         <td style={{ textAlign: "center" }}>
 
-                            <button onClick={t.yesHandler}>{i18n.label1}</button>
-                            <button onClick={t.noHandler}>{i18n.label2}</button>
+                            <button onClick={t.yesHandler}>{i18n.frontPage.label1}</button>
+                            <button onClick={t.noHandler}>{i18n.frontPage.label2}</button>
 
                         </td>
 

@@ -4,9 +4,12 @@ export default {
 
     title: i18n.title,
 
-    label1: 'Yes',
-    label2: 'No',
-    
-    msg1: 'Confirm Delete?'
+    frontPage: {
+
+        label1: 'Yes',
+        label2: 'No',
+        msg1: 'Confirm Delete?'
+
+    }
 
 }

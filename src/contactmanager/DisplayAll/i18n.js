@@ -4,8 +4,12 @@ export default {
 
     title: i18n.title,
 
-    label1: 'New',
-    label2: 'Contacts',
-    msg1: 'No results'
+    rowList: {
+
+        label1: 'New',  
+        label2: 'Contacts',
+        msg1: 'No results'
+
+    }
 
 }
