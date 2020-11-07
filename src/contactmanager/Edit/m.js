@@ -1,11 +1,11 @@
-//import { findById } from './mock'
-//import { updateContact } from './mock'
-import {findById} from './rest'
-import { updateContact } from './rest'
+import { findById } from './mock'
+import { updateContact } from './mock'
+//import {findById} from './rest'
+//import { updateContact } from './rest'
 
-export async function retrieve(s) {
+export async function retrieve(t) {
 
-    return await findById(s)
+    await findById(t)
 
 }
 

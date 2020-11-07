@@ -1,11 +1,7 @@
-export async function findById(s) {
+export async function findById(t) {
 
-    return ({
-
-        name: 'Judas Priest',
-        description: 'Greatest Heavy Metal Band of The World!'
-
-    })
+    t.cState.row.name = 'Judas Priest'
+    t.cState.row.description = 'Greatest Heavy Metal Band of The World!'
 
 }
 

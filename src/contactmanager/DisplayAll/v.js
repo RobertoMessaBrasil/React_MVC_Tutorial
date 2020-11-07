@@ -6,6 +6,7 @@ import i18n from './i18n'
 export function displayAll(t) {
 
     let s = t.state
+    console.log(s)
 
     return (
 

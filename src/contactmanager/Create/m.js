@@ -1,15 +1,19 @@
 //import { create } from './mock'
 import {create} from './rest'
 
-export async function submit(s) {
+export async function submit(t) {
+
+    let s = t.cState
 
     if (s.row.name === '') {
 
-        return { ok: false }
+        s.ok = false
+
+        return
 
     }
 
-    return await create(s)
+    await create(t)
 
 }
 

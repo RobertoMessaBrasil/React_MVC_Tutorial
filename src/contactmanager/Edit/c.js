@@ -7,6 +7,8 @@ import { editForm, invalidDataMsg } from './v'
 
 export default class extends Component {
 
+    cState
+
     render() {
 
         let t = this
@@ -28,7 +30,7 @@ export default class extends Component {
         return editForm(t)
 
     }
-    
+
     changeHandler(e) {
 
         let t = this
@@ -76,7 +78,11 @@ export default class extends Component {
         let t = this
         let s = t.state
 
-        t.setState({ row: await retrieve(s) })
+        t.cState = s
+
+        await retrieve(t)
+
+        t.setState(t.cState)
 
     }
 

@@ -5,6 +5,8 @@ import { displayAll } from './v'
 
 export default class extends Component {
 
+    cState
+
     render() {
 
         let t = this
@@ -16,9 +18,14 @@ export default class extends Component {
     async componentDidMount() {
 
         let t = this
+
         let s = t.state
 
-        t.setState({ rowList: await retrieveAll(s) })
+        t.cState = s
+
+        await retrieveAll(t)
+
+        t.setState(t.cState)
 
     }
 

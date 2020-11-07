@@ -7,6 +7,8 @@ import { createForm, invalidDataMsg } from './v'
 
 export default class extends Component {
 
+    cState = {}
+
     render() {
 
         let t = this
@@ -50,11 +52,16 @@ export default class extends Component {
         e.preventDefault()
 
         let t = this
+
         let s = t.state
 
-        let result = await submit(s)
+        t.cState = s
 
-        if (result.ok) {
+        await submit(t)
+
+        t.setState(t.cState)
+
+        if (s.ok) {
 
             t.setState({ isRedirect: true })
 

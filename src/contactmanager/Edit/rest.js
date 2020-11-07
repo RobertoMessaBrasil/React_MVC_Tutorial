@@ -50,7 +50,7 @@ export async function updateContact(s) {
 
         )
 
-            .then(response => { ok: true })
+            .then(response => { return { ok: true } })
 
             .catch(e => {
 

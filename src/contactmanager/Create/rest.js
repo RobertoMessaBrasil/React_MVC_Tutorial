@@ -1,49 +1,45 @@
-const EP_URL = 'http://localhost:8080/contactmanager/createContact'
+const EP_URL = 'http://192.168.0.103:8080/contactmanager/contacts'
 
-export async function create(s) {
+export async function create(t) {
 
-    return (
+    let s = t.cState
 
-        await fetch(
+    await fetch(
 
-            EP_URL,
+        EP_URL,
 
-            {
+        {
 
-                method: 'POST',
+            method: 'POST',
 
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
 
-                body: JSON.stringify({
+            body: JSON.stringify({
 
-                    name: s.row.name,
+                name: s.row.name,
 
-                    description: s.row.description
+                description: s.row.description
 
-                })
+            })
+
+        })
+
+        .then(response => { t.cState.ok = true })
+
+        .catch(
+
+            e => {
+
+                t.cState.ok = false
+
+                console.log(e)
 
             }
 
         )
-
-            .then(response => s.result = { ok: true })
-
-            .catch(
-
-                e => {
-
-                    s.result = { ok: false }
-
-                    console.log(e)
-
-                }
-
-            )
-
-    )
 
 
 }

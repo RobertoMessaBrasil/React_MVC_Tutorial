@@ -1,15 +1,20 @@
-const EP_URL = 'http://localhost:8080/contactmanager/findAll'
+const EP_URL = 'http://192.168.0.103:8080/contactmanager/contacts'
 
-export async function findAll(s) {
+export async function findAll(t) {
 
-    return (
+    await fetch(EP_URL)
 
-        await fetch(EP_URL)
+        .then(response => {
 
-            .then(response => response.json())
+            return response.json()
 
-            .catch(e => console.log(e))
+        })
+        .then(json => {
 
-    )
+            t.cState.rowList = json
+
+        })
+
+        .catch(e => console.log(e))
 
 }

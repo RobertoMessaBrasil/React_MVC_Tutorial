@@ -1,9 +1,9 @@
 //import { findAll } from './mock'
 import { findAll } from './rest'
 
-export async function retrieveAll(s) {
+export async function retrieveAll(t) {
 
-    return await findAll(s)
+    await findAll(t)
 
 }
 

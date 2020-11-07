@@ -1,5 +1,5 @@
-export function create(s) {
+export function create(t) {
 
-    return { ok: true }
+    t.cState.ok = true
 
 }

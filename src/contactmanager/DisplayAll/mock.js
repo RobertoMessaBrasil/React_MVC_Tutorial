@@ -1,9 +1,8 @@
-export async function findAll(s) {
+export async function findAll(t) {
 
-    return [
+    t.cState.rowList = [
 
         { id: 1, name: 'Judas Priest', description: 'Greatest Heavy Metal Band of The World!' }
 
     ]
-
 }
