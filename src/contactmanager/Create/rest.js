@@ -1,8 +1,8 @@
-const EP_URL = 'http://192.168.0.103:8080/contactmanager/contacts'
+const EP_URL = 'http://192.168.0.103:8080/contacts'
 
 export async function create(t) {
 
-    let s = t.cState
+    let s = t.state
 
     await fetch(
 
@@ -27,13 +27,13 @@ export async function create(t) {
 
         })
 
-        .then(response => { t.cState.ok = true })
+        .then(response => { t.state.ok = true })
 
         .catch(
 
             e => {
 
-                t.cState.ok = false
+                t.state.ok = false
 
                 console.log(e)
 

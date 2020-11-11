@@ -7,8 +7,6 @@ import { createForm, invalidDataMsg } from './v'
 
 export default class extends Component {
 
-    cState = {}
-
     render() {
 
         let t = this
@@ -52,14 +50,13 @@ export default class extends Component {
         e.preventDefault()
 
         let t = this
-
         let s = t.state
 
-        t.cState = s
+        let tt = {state:s}
 
-        await submit(t)
+        await submit(tt)
 
-        t.setState(t.cState)
+        t.setState(tt.state)
 
         if (s.ok) {
 

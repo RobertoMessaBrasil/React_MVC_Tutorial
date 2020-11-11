@@ -1,7 +1,7 @@
-import { findById } from './mock'
-import { updateContact } from './mock'
-//import {findById} from './rest'
-//import { updateContact } from './rest'
+//import { findById } from './mock'
+//import { updateContact } from './mock'
+import { findById } from './rest'
+import { updateContact } from './rest'
 
 export async function retrieve(t) {
 
@@ -9,15 +9,19 @@ export async function retrieve(t) {
 
 }
 
-export async function submit(s) {
+export async function submit(t) {
 
+    let s = t.state
+    
     if (s.row.name === '') {
+        
+        t.state.ok = false
 
-        return { ok: false }
+        return
 
     }
 
-    return await updateContact(s)
+    await updateContact(t)
 
 }
 

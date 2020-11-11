@@ -19,7 +19,11 @@ export default class extends Component {
         let t = this
         let s = t.state
 
-        t.setState({ row: await retrieve(s) })
+        let tt = {state:s}
+
+        await retrieve(tt)
+
+        t.setState(tt)
 
     }
 

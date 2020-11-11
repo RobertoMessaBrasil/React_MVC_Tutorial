@@ -3,7 +3,7 @@ import {create} from './rest'
 
 export async function submit(t) {
 
-    let s = t.cState
+    let s = t.state
 
     if (s.row.name === '') {
 

@@ -1,10 +1,10 @@
-export async function findById(s) {
+export async function findById(t) {
 
-    return ({
+    t.state.row = {
 
         name: 'Judas Priest',
         description: 'Greatest Heavy Metal Band of The World!'
 
-    })
+    }
 
 }

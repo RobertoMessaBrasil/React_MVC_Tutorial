@@ -7,8 +7,6 @@ import { editForm, invalidDataMsg } from './v'
 
 export default class extends Component {
 
-    cState
-
     render() {
 
         let t = this
@@ -55,13 +53,19 @@ export default class extends Component {
         let t = this
         let s = t.state
 
-        let result = await submit(s)
+        let tt = { state: s }
 
-        if (result.ok) {
+        await submit(tt)
+
+        if (tt.state.ok) {
 
             t.setState({ isRedirect: true })
 
+            return
+
         }
+
+        t.setState({ isInvalidContactData: true })
 
     }
 
@@ -78,11 +82,11 @@ export default class extends Component {
         let t = this
         let s = t.state
 
-        t.cState = s
+        let tt = { state: s }
 
-        await retrieve(t)
+        await retrieve(tt)
 
-        t.setState(t.cState)
+        t.setState(tt.state)
 
     }
 

@@ -1,13 +1,14 @@
-const EP_URL = 'http://localhost:8080/contactmanager/findById'
-const EP_UPDATEURL = 'http://localhost:8080/contactmanager/updateContact'
+const EP_URL = 'http://192.168.0.103:8080/contacts'
 
-export async function findById(s) {
+export async function findById(t) {
 
     return (
 
-        await fetch(EP_URL + '/' + s.id)
+        await fetch(EP_URL + '/' + t.state.id)
 
             .then(response => response.json())
+
+            .then(json => { t.state.row = json })
 
             .catch(e => console.log(e))
 
@@ -15,15 +16,16 @@ export async function findById(s) {
 
 }
 
-export async function updateContact(s) {
+export async function updateContact(t) {
 
+    let s = t.state
     let row = s.row
 
     return (
 
         await fetch(
 
-            EP_UPDATEURL,
+            EP_URL + '/' + row.id,
 
             {
 
@@ -50,13 +52,13 @@ export async function updateContact(s) {
 
         )
 
-            .then(response => { return { ok: true } })
+            .then(response => { t.state.ok = true })
 
             .catch(e => {
 
                 console.log(e)
 
-                return { ok: false }
+                t.state.ok = false
 
             })
 

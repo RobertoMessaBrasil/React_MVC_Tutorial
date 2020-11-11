@@ -1,4 +1,4 @@
-const EP_URL = 'http://192.168.0.103:8080/contactmanager/contacts'
+const EP_URL = 'http://192.168.0.103:8080/contacts'
 
 export async function findAll(t) {
 
@@ -9,9 +9,10 @@ export async function findAll(t) {
             return response.json()
 
         })
+
         .then(json => {
 
-            t.cState.rowList = json
+            t.state.rowList = json
 
         })
 

@@ -1,9 +1,9 @@
-import { findById } from './mock'
-//import {findById} from './rest'
+//import { findById } from './mock'
+import {findById} from './rest'
 
-export async function retrieve(s) {
+export async function retrieve(t) {
 
-    return await findById(s)
+    return await findById(t)
 
 }
 

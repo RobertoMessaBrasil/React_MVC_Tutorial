@@ -1,15 +1,13 @@
-const EP_URL = 'http://localhost:8080/contactmanager/findById'
+const EP_URL = 'http://192.168.0.103:8080/contacts'
 
-export async function findById(s) {
+export async function findById(t) {
 
-    return (
+    await fetch(EP_URL + '/' + t.state.id)
 
-        await fetch(EP_URL + '/' + s.row.id)
+        .then(response => response.json())
 
-            .then(response => response.json())
+        .then(json => { t.state.row = json })
 
-            .catch(e => console.log(e))
-
-    )
+        .catch(e => console.log(e))
 
 }

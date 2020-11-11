@@ -6,8 +6,7 @@ import i18n from './i18n'
 export function displayAll(t) {
 
     let s = t.state
-    console.log(s)
-
+    
     return (
 
         <div>
@@ -30,7 +29,7 @@ export function displayAll(t) {
 
                     s.rowList.map(
 
-                        row => <p><Link to={"/Display/" + row.id}>{row.name}</Link></p>
+                        row => <p key={row.id}><Link to={"/Display/" + row.id}>{row.name}</Link></p>
 
                     )
 
