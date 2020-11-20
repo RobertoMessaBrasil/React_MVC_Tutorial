@@ -15,4 +15,4 @@ https://github.com/RobertoMessaBrasil/SpringBoot_Rest_JPA_H2_Tutorial
 
 There is an image with the whole app at hub.docker.com:
 
-robertomessabrasil/contactmanager
+https://hub.docker.com/repository/docker/robertomessabrasil/contactmanager
