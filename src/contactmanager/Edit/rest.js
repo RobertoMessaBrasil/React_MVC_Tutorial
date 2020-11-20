@@ -1,4 +1,4 @@
-const EP_URL = 'http://192.168.0.103:8080/contacts'
+const EP_URL = '/contacts'
 
 export async function findById(t) {
 

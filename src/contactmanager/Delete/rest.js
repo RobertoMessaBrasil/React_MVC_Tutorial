@@ -1,4 +1,4 @@
-const EP_URL = 'http://localhost:8080/contacts'
+const EP_URL = '/contacts'
 
 export async function deleteContact(s) {
 
